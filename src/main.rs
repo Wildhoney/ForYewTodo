@@ -81,7 +81,7 @@ fn todos(TodoProps { todos, on_remove }: &TodoProps) -> Html {
 
 #[derive(Properties, PartialEq)]
 struct FormProps {
-    on_add: Callback<Model>
+    on_add: Callback<String>
 }
 
 #[function_component(Form)]
@@ -94,8 +94,7 @@ fn form(FormProps { on_add }: &FormProps) -> Html {
 
         Callback::from(move |event: FocusEvent| {
             event.prevent_default();
-            let new_todo = Model { id: 4, text: todo.to_string(), done: false };
-            on_add.emit(new_todo);
+            on_add.emit(todo.to_string());
             todo.set("".to_string());
         })
     };
@@ -125,9 +124,10 @@ fn app() -> Html {
     let on_add = {
         let todos = todos.clone();
 
-        Callback::from(move |model: Model| {
+        Callback::from(move |value: String| {
             let mut updated_todos: Vec<Model> = todos.to_vec().clone();
-            updated_todos.push(model);
+            let todo = Model { id: todos.len() + 1, text: value, done: false };
+            updated_todos.push(todo);
             todos.set(updated_todos);
         })
     };
