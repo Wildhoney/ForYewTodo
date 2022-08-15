@@ -1,7 +1,6 @@
 use yew::{function_component, html, use_state, Callback};
 
-use crate::form::Form;
-use crate::todos::Todos;
+use crate::components::{form::Form, todos::Todos};
 use crate::utils::{Model, get_initial_state};
 
 #[function_component(App)]
@@ -31,8 +30,8 @@ pub fn app() -> Html {
     };
 
     html! {
-        <section data-qa="app">
-            <h1>{"Todos"}</h1>
+        <section data-qa="app" class="app">
+            <h1>{format!("Todos ({})", todos.len())}</h1>
             <Form on_add={on_add} />
             <Todos todos={(*todos).clone()} on_remove={on_remove.clone()} />
         </section>

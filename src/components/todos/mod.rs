@@ -1,6 +1,6 @@
 use yew::{function_component, Html, html, Properties, Callback};
 
-use crate::todo::Todo;
+use crate::components::todo::Todo;
 use crate::utils::Model;
 
 #[derive(Properties, PartialEq)]

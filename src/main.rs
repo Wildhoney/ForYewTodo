@@ -1,7 +1,11 @@
 pub mod app;
-pub mod form;
-pub mod todo;
-pub mod todos;
+
+pub mod components {
+    pub mod form;
+    pub mod todo;
+    pub mod todos;
+}
+
 pub mod utils;
 
 use yew;

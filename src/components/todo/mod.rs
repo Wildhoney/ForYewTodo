@@ -2,10 +2,10 @@ use yew::{function_component, html, Properties, Callback};
 
 use crate::utils::Model;
 
-pub fn is_done(done: bool) -> String {
+pub fn is_done_label(done: bool) -> String {
     return match done {
-        true => "yes".to_string(),
-        false => "no".to_string()
+        true => "complete".to_string(),
+        false => "incomplete".to_string()
     }
 }
 
@@ -29,7 +29,11 @@ pub fn todo(Props { todo, on_remove }: &Props) -> Html {
     html! {
         <li data-qa="todo">
             <p>{format!("{}: {}", todo.id, todo.text)}</p>
-            <p>{format!("Done: {}", is_done(todo.done))}</p>
+        
+            <p class={format!("status {}", is_done_label(todo.done))}>
+                {is_done_label(todo.done)}
+            </p>
+        
             <button onclick={on_remove}>{"Remove"}</button>
         </li>
     }
